@@ -5,6 +5,10 @@ from asteroid import Asteroid
 from asteroidfield import AsteroidField
 def main():
 
+    print("Starting asteroids!")
+    print("Screen width:",SCREEN_WIDTH)
+    print("Screen height:",SCREEN_HEIGHT)
+
     pygame.init()
     running = True
     clock=pygame.time.Clock()
@@ -33,16 +37,13 @@ def main():
                 i.update(dt)
             for j in drawable:
                 j.draw(screen)
-
+            for asteroid in asteroids:
+                if asteroid.checkCollision(player):
+                    exit()
             pygame.display.flip()
 
             fps=clock.tick(60)
             dt=fps/1000
-
-    print("Starting asteroids!")
-    print("Screen width:",SCREEN_WIDTH)
-    print("Screen height:",SCREEN_HEIGHT) 
-
 
 if __name__=="__main__":
     main()
