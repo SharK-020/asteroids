@@ -10,14 +10,27 @@ def main():
 
     if(pygame.get_init()):
         screen=pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
+
+        updatable=pygame.sprite.Group()
+        drawable=pygame.sprite.Group()
+
         player=Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
+
+        updatable.add(player)
+        drawable.add(player)
+
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
             screen.fill("black")
-            player.update(dt)
-            player.draw(screen)
+
+            for i in updatable:
+                i.update(dt)
+            
+            for j in drawable:
+                j.draw(screen)
+
             pygame.display.flip()
 
             fps=clock.tick(60)
